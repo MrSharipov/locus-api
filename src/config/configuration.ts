@@ -9,4 +9,8 @@ export default () => ({
     name: process.env.DATABASE_NAME ?? 'postgres',
     synchronize: process.env.DATABASE_SYNCHRONIZE === 'true',
   },
+  auth: {
+    jwtSecret: process.env.JWT_SECRET ?? 'local_jwt_secret_key',
+    jwtExpiration: process.env.JWT_EXPIRATION ?? '1d',
+  },
 });
