@@ -1,98 +1,283 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# API Usage Guide
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Base URL
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Project setup
-
-```bash
-$ npm install
+```txt
+http://localhost:3000
 ```
 
-## Compile and run the project
+---
 
-```bash
-# development
-$ npm run start
+## Swagger Documentation
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```txt
+http://localhost:3000/swagger
 ```
 
-## Run tests
+---
 
-```bash
-# unit tests
-$ npm run test
+# Authentication
 
-# e2e tests
-$ npm run test:e2e
+## Login
 
-# test coverage
-$ npm run test:cov
+### Request
+
+```http
+POST /auth/login
+Content-Type: application/json
 ```
 
-## Deployment
+### Body
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+```json
+{
+  "username": "admin",
+  "password": "admin123"
+}
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+---
 
-## Resources
+## Available Users
 
-Check out a few resources that may come in handy when working with NestJS:
+| Role | Username | Password |
+|---|---|---|
+| admin | admin | admin123 |
+| normal | normal | normal123 |
+| limited | limited | limited123 |
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+---
 
-## Support
+## Successful Response
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```json
+{
+  "accessToken": "JWT_TOKEN"
+}
+```
 
-## Stay in touch
+---
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+# Using JWT Token
 
-## License
+Add authorization header:
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+```txt
+Authorization: Bearer JWT_TOKEN
+```
+
+---
+
+# Locus API
+
+## Endpoint
+
+```http
+GET /locus
+```
+
+---
+
+# Query Parameters
+
+| Parameter | Example |
+|---|---|
+| id | `?id=3106326` |
+| assemblyId | `?assemblyId=Rrox_v1` |
+| regionId | `?regionId=85682522` |
+| membershipStatus | `?membershipStatus=member` |
+| sideloading | `?sideloading=locusMembers` |
+| page | `?page=1` |
+| limit | `?limit=10` |
+| sortBy | `?sortBy=id` |
+| order | `?order=DESC` |
+
+---
+
+# Examples
+
+## Basic Request
+
+```http
+GET /locus
+```
+
+---
+
+## Filter by ID
+
+```http
+GET /locus?id=3106326
+```
+
+---
+
+## Filter by Assembly ID
+
+```http
+GET /locus?assemblyId=Rrox_v1
+```
+
+---
+
+## Filter by Region ID
+
+```http
+GET /locus?regionId=85682522
+```
+
+---
+
+## Filter by Membership Status
+
+```http
+GET /locus?membershipStatus=member
+```
+
+---
+
+## Pagination
+
+```http
+GET /locus?page=1&limit=10
+```
+
+---
+
+## Sorting
+
+```http
+GET /locus?sortBy=id&order=DESC
+```
+
+Supported sorting fields:
+
+```txt
+id
+assemblyId
+memberCount
+```
+
+---
+
+## Multiple Filters
+
+```http
+GET /locus?assemblyId=Rrox_v1&membershipStatus=member&page=1&limit=5
+```
+
+---
+
+# Sideloading
+
+## Request
+
+```http
+GET /locus?sideloading=locusMembers
+```
+
+---
+
+## Example Response
+
+```json
+[
+  {
+    "id": 3106352,
+    "assemblyId": "Rrox_v1",
+    "locusName": "...",
+    "memberCount": 1,
+    "locusMembers": [
+      {
+        "id": 1,
+        "ursTaxid": "URS0000A888AB_61622",
+        "regionId": 85682522,
+        "membershipStatus": "member"
+      }
+    ]
+  }
+]
+```
+
+---
+
+# Role Behavior
+
+## Admin
+
+Can:
+- access all data
+- use sideloading
+
+---
+
+## Normal
+
+Can:
+- access locus data
+- cannot use sideloading
+
+Forbidden request:
+
+```http
+GET /locus?sideloading=locusMembers
+```
+
+Response:
+
+```json
+{
+  "statusCode": 403,
+  "message": "Sideloading allowed only for admin"
+}
+```
+
+---
+
+## Limited
+
+Automatically restricted to allowed region IDs.
+
+---
+
+# Error Examples
+
+## Validation Error
+
+```json
+{
+  "statusCode": 400,
+  "message": [
+    "limit must not be greater than 1000"
+  ]
+}
+```
+
+---
+
+## Unauthorized
+
+```json
+{
+  "statusCode": 401,
+  "message": "Unauthorized"
+}
+```
+
+---
+
+# Testing
+
+## Run Unit Tests
+
+```bash
+npm run test
+```
+
+---
+
+## Run E2E Tests
+
+```bash
+npm run test:e2e
+```
