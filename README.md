@@ -1,5 +1,23 @@
 # API Usage Guide
 
+## Production API
+
+```txt
+https://sotivo.uz/api
+```
+
+---
+
+## Swagger Documentation
+
+```txt
+https://sotivo.uz/api/swagger
+```
+
+---
+
+# Local Development
+
 ## Base URL
 
 ```txt
@@ -8,7 +26,7 @@ http://localhost:3000
 
 ---
 
-## Swagger Documentation
+## Local Swagger Documentation
 
 ```txt
 http://localhost:3000/swagger
@@ -42,9 +60,9 @@ Content-Type: application/json
 
 | Role | Username | Password |
 |---|---|---|
-| admin | admin | admin123 |
-| normal | normal | normal123 |
-| limited | limited | limited123 |
+| admin | john | admin123 |
+| normal | sarah | normal123 |
+| limited | anna | limited123 |
 
 ---
 
