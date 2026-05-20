@@ -1,7 +1,7 @@
-import { UserRole } from "../../users/users.data";
+import { UserRoleEnum } from '../../users/users.data';
 
 export interface RequestUser {
   userId: number;
   username: string;
-  role: UserRole;
+  role: UserRoleEnum;
 }

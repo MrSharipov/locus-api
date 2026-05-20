@@ -1,7 +1,7 @@
-import { UserRole } from "../../users";
+import { UserRoleEnum } from '../../users';
 
 export interface JwtPayload {
   sub: number;
   username: string;
-  role: UserRole;
+  role: UserRoleEnum;
 }
