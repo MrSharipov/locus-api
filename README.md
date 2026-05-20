@@ -3,7 +3,7 @@
 ## Production API
 
 ```txt
-https://sotivo.uz/api
+https://sotivo.uz
 ```
 
 ---
@@ -11,7 +11,7 @@ https://sotivo.uz/api
 ## Swagger Documentation
 
 ```txt
-https://sotivo.uz/api/swagger
+https://sotivo.uz/swagger
 ```
 
 ---
@@ -49,7 +49,7 @@ Content-Type: application/json
 
 ```json
 {
-  "username": "admin",
+  "username": "john",
   "password": "admin123"
 }
 ```
