@@ -1,4 +1,9 @@
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { GetLocusQueryDto } from './dto/get-locus-query.dto';
@@ -7,6 +12,8 @@ import { RequestUser } from './interfaces/request-user.interface';
 
 @Injectable()
 export class LocusService {
+  private readonly logger = new Logger(LocusService.name);
+
   constructor(
     @InjectRepository(LocusEntity)
     private readonly locusRepository: Repository<LocusEntity>,
@@ -88,24 +95,32 @@ export class LocusService {
 
     /* EXECUTE QUERY */
 
-    const results = await query.getMany();
+    try {
+      const results = await query.getMany();
 
-    // If user is normal or limited, we return only a subset of fields.
-    if (user.role === 'normal' || user.role === 'limited') {
-      return results.map((locus) => ({
-        id: locus.id,
-        assemblyId: locus.assemblyId,
-        locusName: locus.locusName,
-        publicLocusName: locus.publicLocusName,
-        chromosome: locus.chromosome,
-        strand: locus.strand,
-        locusStart: locus.locusStart,
-        locusStop: locus.locusStop,
-        memberCount: locus.memberCount,
-      }));
+      // If user is normal or limited, we return only a subset of fields.
+      if (user.role === 'normal' || user.role === 'limited') {
+        return results.map((locus) => ({
+          id: locus.id,
+          assemblyId: locus.assemblyId,
+          locusName: locus.locusName,
+          publicLocusName: locus.publicLocusName,
+          chromosome: locus.chromosome,
+          strand: locus.strand,
+          locusStart: locus.locusStart,
+          locusStop: locus.locusStop,
+          memberCount: locus.memberCount,
+        }));
+      }
+
+      // For admin users, we return all fields
+      return results;
+    } catch (error: unknown) {
+      this.logger.error(
+        'Failed to fetch locus data',
+        error instanceof Error ? error.stack : String(error),
+      );
+      throw new InternalServerErrorException('Failed to fetch locus data');
     }
-
-    // For admin users, we return all fields
-    return results;
   }
 }
